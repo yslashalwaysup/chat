@@ -27,7 +27,11 @@ io.on("connection", (socket) => {
     });
 });
 
-// Inicia o servidor na porta 3000
-server.listen(3000, () => {
-    console.log("Servidor rodando na porta 3000");
-});
+// A função serverless não precisa de "server.listen" em Vercel
+module.exports = (req, res) => {
+    server.listen(3000, () => {
+        console.log("Servidor rodando na porta 3000");
+    });
+
+    return res.send("Servidor em execução");
+};
